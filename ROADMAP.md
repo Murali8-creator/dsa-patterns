@@ -213,8 +213,8 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 
 | #  | Sub-Pattern                          | Core Idea                                         | Status |
 |----|--------------------------------------|---------------------------------------------------|--------|
-| 13 | Converging — Sorted Array Target Sum | Left + right pointers walk inward                 | [ ]    |
-| 14 | Fast & Slow — Cycle Detection        | Tortoise & hare for cycles, middle finding        | [ ]    |
+| 13 | Converging — Sorted Array Target Sum | Left + right pointers walk inward                 | [x]    |
+| 14 | Fast & Slow — Cycle Detection        | Tortoise & hare for cycles, middle finding        | [x]    |
 | 15 | Expanding from Center — Palindromes  | Expand outward to find palindromic substrings     | [ ]    |
 | 16 | In-Place Array Modification          | Remove/move elements with read+write pointers     | [ ]    |
 | 17 | String Reversal                      | Reverse in-place with two pointers                | [ ]    |
