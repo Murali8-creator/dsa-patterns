@@ -299,6 +299,60 @@ Fast & Slow is always preferred when it applies.
 - **Recognize it when:** find the node where a cycle begins
 - **Key takeaway:** Phase 2 is Floyd's magic — trust the math: walking L from head = walking L from meeting point (both land at cycle start).
 
+### 4. Happy Number (LC 202)
+
+- **Mental Model:** Same two runners analogy — but the track isn't a linked list, it's a sequence of numbers where each "next step" is computed by `getSum(current) = sum of squares of digits`. Since digit-sums stay bounded, the sequence must eventually cycle. If the cycle is just `1 → 1 → 1...` (a self-loop at 1), the number is happy. Otherwise, it's stuck in a non-1 cycle.
+- **Recognize it when:** any deterministic sequence that must eventually repeat — not just linked lists
+- **Key takeaway:** Fast & slow works on **any sequence where each element has exactly one "next."** Happy Number's `1` is a self-loop — so every happy number's "cycle" is `{1}`. The test becomes: *detect the cycle, then check if the meeting point is 1.*
+
+#### Canonical Template (cycle-based)
+
+```java
+public boolean isHappy(int n) {
+    int slow = n, fast = n;
+
+    do {
+        slow = getSum(slow);
+        fast = getSum(getSum(fast));
+    } while (slow != fast);
+
+    return fast == 1;
+}
+
+private int getSum(int n) {
+    int sum = 0;
+    while (n > 0) {
+        int d = n % 10;
+        sum += d * d;
+        n /= 10;
+    }
+    return sum;
+}
+```
+
+#### Why It Works
+
+- `getSum(1) = 1` → once you hit 1, you stay at 1 forever → it's a cycle of length 1
+- Happy numbers: sequence reaches 1 and cycles there
+- Unhappy numbers: sequence hits a non-1 cycle (e.g., `4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4...`)
+- Either way, slow and fast WILL meet. The question is just **where**.
+
+---
+
+## The Bigger Takeaway — Fast & Slow Beyond Linked Lists
+
+Fast & slow isn't just a linked list technique. It works on **any deterministic sequence** where:
+1. Each element has exactly one "next" (via a function, `.next` pointer, state transition, etc.)
+2. The state space is **bounded** (so it must eventually cycle — pigeonhole principle)
+
+**Examples:**
+- Linked list cycle — `next` = `node.next`
+- Happy Number — `next` = `getSum(current)`
+- Pseudo-random sequences — `next` = `f(seed)`
+- Fixed-point iteration — `next` = `g(x)`
+
+Whenever you see "this sequence might cycle and I need to detect/exit the cycle" → fast & slow in O(1) space.
+
 ---
 
 ### Summary Table
@@ -308,6 +362,7 @@ Fast & Slow is always preferred when it applies.
 | 1 | Linked List Cycle (LC 141) | 1x / 2x | Fast laps slow if there's a loop |
 | 2 | Middle of the Linked List (LC 876) | 1x / 2x | Fast at end → slow at midpoint |
 | 3 | Linked List Cycle II (LC 142) | 1x / 2x + Phase 2 | Phase 1 meet, reset slow to head, walk 1x each — meet at cycle start |
+| 4 | Happy Number (LC 202) | 1x / 2x over `getSum()` | Same pattern on numbers — check if meeting point is 1 |
 
 ---
 
