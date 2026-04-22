@@ -186,28 +186,41 @@ Whenever you see:
 | Preprocess cost | O(n) | O(n) |
 | Per-query cost | O(1) | O(1) |
 
-### Optimized Further — O(1) Space with Two Pointers (advanced)
+### Optimized Further — O(1) Space with Two Pointers
 
-Instead of two arrays, maintain running `leftMax` and `rightMax` variables and move the pointer on the **shorter side** (same bottleneck logic as Container With Most Water).
+Instead of two arrays, maintain running `leftMax` and `rightMax` variables and process the pointer on the **shorter side** (same bottleneck logic as Container With Most Water).
 
-The insight: when `height[left] < height[right]`, we know the right side has a bar at least as tall as `rightMax`. So the bottleneck at `left` is `leftMax` — we can safely compute water there.
+**The insight (trust this):** When `leftMax <= rightMax`, we know the right side has a bar at least as tall as `rightMax`. So the bottleneck at position `left` is `leftMax` alone — we can safely compute water there without knowing the true max on the right.
+
+**Key gotcha:** "Process the shorter side" means TWO actions:
+1. **Compute water at that side's pointer position** (not the other one!)
+2. **Move that pointer inward**
+
+Don't hardcode water calculation to one side — split based on the comparison.
 
 ```java
 int left = 0, right = n - 1;
-int leftMax = 0, rightMax = 0, total = 0;
+int leftMax = height[0], rightMax = height[n - 1];
+int total = 0;
 
 while (left < right) {
-    if (height[left] < height[right]) {
-        if (height[left] >= leftMax) leftMax = height[left];
-        else total += leftMax - height[left];
+    // Update running maxes for current positions
+    if (height[left] > leftMax) leftMax = height[left];
+    if (height[right] > rightMax) rightMax = height[right];
+
+    // Process the shorter side: compute water AND move pointer
+    if (leftMax <= rightMax) {
+        total += leftMax - height[left];
         left++;
     } else {
-        if (height[right] >= rightMax) rightMax = height[right];
-        else total += rightMax - height[right];
+        total += rightMax - height[right];
         right--;
     }
 }
+
+return total;
 ```
+
 
 ---
 
@@ -250,12 +263,42 @@ Converging two pointers can decide moves based on different things:
 
 ## Problems Solved
 
-| # | Problem | Category | Key Takeaway |
-|---|---------|----------|--------------|
-| 1 | Two Sum II (LC 167) | Sum-based | Pure converging template on sorted array |
-| 2 | Three Sum (LC 15) | Sum-based | Fix one + two pointer on rest. Duplicate skip at BOTH levels (outer `i` + inner match) |
-| 3 | Container With Most Water (LC 11) | Bottleneck | Move the **shorter** pointer — only move with a chance to improve |
-| 4 | Trapping Rain Water (LC 42) | Prefix max + two pointers | `water[i] = min(leftMax, rightMax) - height[i]`. Solve with O(n) precomputed arrays OR O(1) two-pointer |
+### 1. Two Sum II (LC 167) — Sum-based
+
+- **Mental Model:** Two people at opposite ends of a sorted line. They shout their sum; if too small, the low person steps up; if too big, the high person steps down. They meet at the answer.
+- **Recognize it when:** sorted array + find a pair that sums to target
+- **Key takeaway:** Pure converging template. Direction of move is dictated by `sum vs target`.
+
+### 2. Three Sum (LC 15) — Sum-based
+
+- **Mental Model:** "I pick one number, you two find the rest." Fix one element, then the remaining two-sum problem is solved with converging pointers on the rest. Repeat with every possible "fixed" element.
+- **Recognize it when:** find triplets / quadruplets satisfying a sum condition
+- **Key takeaway:** K-sum problems reduce to (K-1)-sum inside a loop. Duplicates must be skipped at **both** levels — outer `i` and inner match.
+
+### 3. Container With Most Water (LC 11) — Bottleneck
+
+- **Mental Model:** Two walls holding water. The **shorter wall always leaks** — that's the bottleneck. Moving the taller wall changes nothing useful (shorter wall still leaks at the same level), so you always move the shorter side hoping to find a taller one.
+- **Recognize it when:** two endpoints + area/distance/capacity between them, and one side is a "limiting factor"
+- **Key takeaway:** When moving one pointer can only hurt and moving the other *might* help — always move the "might help" pointer.
+
+### 4. Trapping Rain Water (LC 42) — Prefix Max / Two Pointers
+
+- **Mental Model:** For every column, water sits up to the **shorter of its two walls** (left wall = tallest bar to the left, right wall = tallest bar to the right). Sum water across all columns.
+  - **Prefix-max version:** Two surveyors walk the whole terrain first and note down the tallest bar seen from each side. Then at each column, water = `min(leftWall, rightWall) - myHeight`.
+  - **Two-pointer version:** Two surveyors walk toward each other; whoever stands on the shorter wall processes their column (because their partner is guaranteed taller, so the bottleneck is on their side).
+- **Recognize it when:** you need `min(leftMax, rightMax)` — something about both-sides context for every position
+- **Key takeaway:** Re-scanning for max at every index is O(n²). Precompute running max (prefix/suffix) OR collapse into two running variables with converging pointers.
+
+---
+
+### Summary Table
+
+| # | Problem | Category | One-line Mental Model |
+|---|---------|----------|-----------------------|
+| 1 | Two Sum II (LC 167) | Sum-based | Two walkers on a sorted line — step based on sum vs target |
+| 2 | Three Sum (LC 15) | Sum-based | Fix one, two-sum the rest |
+| 3 | Container With Most Water (LC 11) | Bottleneck | Shorter wall leaks — move it |
+| 4 | Trapping Rain Water (LC 42) | Prefix max / 2-ptr | Water over each column = `min(leftMax, rightMax) - height[i]` |
 
 ---
 
