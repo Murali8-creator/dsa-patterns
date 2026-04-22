@@ -205,6 +205,44 @@ This means:
 
 Both pointers moving 1 step/turn → they arrive at the cycle start together.
 
+### The "Same Forward Distance" Clarification
+
+The two pointers aren't equidistant in some abstract sense — they have the same **forward distance** to reach the cycle start:
+
+- From `head`: forward distance to cycle start = **L**
+- From meeting point: forward distance to cycle start = **C − k** (complete what's left of the current loop) — or `nC − k` if you want to loop extra times
+
+The identity **`L = nC − k`** literally says "these two forward distances are equal." Same speed, same distance → arrive together.
+
+### Why Slow Gets Reset to Head (Not Somewhere Else)
+
+Once Phase 1 ends, we know two locations:
+- `head` (where we started)
+- the meeting point (inside the cycle)
+
+To find the cycle start (a third location), the simplest approach is to walk from both known locations toward it. The math guarantees they meet at the cycle start when walking at the same pace. That's why we reset slow to head — not randomness, just the only other useful anchor we have.
+
+### Where the Identity Is "Applied" in the Code
+
+It's **not** an explicit line. It's the **reason** the Phase 2 loop terminates exactly at the cycle start:
+- Loop condition: `while (slow != fast)`
+- Both walk 1 step at a time
+- They meet at cycle start **because** of `L = nC − k`
+
+No code change uses the formula — the formula just guarantees the loop does the right thing.
+
+### Interview-Ready Explanation (Rehearse This)
+
+If an interviewer asks "why does Phase 2 work?", say this:
+
+> "When the fast and slow pointers first meet, slow has walked `L + k` steps — where `L` is the tail length and `k` is how far into the cycle we are from its start. Fast has walked exactly twice that: `2(L + k)`. But fast also traveled some whole number of cycles, so `2(L + k) = L + k + n·C`, which simplifies to `L = n·C − k`. That equation tells me the distance from head to the cycle start is the same as the forward distance from the meeting point to the cycle start — so if I walk from both at the same speed, they arrive at the cycle start together."
+
+4 sentences. Draw the list, label L, k, C. Done.
+
+### One-sentence Backup (If You Blank)
+
+> "Head and the meeting point are equidistant (in forward direction) from the cycle start — so two pointers walking in sync from those positions meet exactly at the cycle start."
+
 ---
 
 ## Pattern Variants Summary
