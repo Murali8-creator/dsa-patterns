@@ -192,6 +192,11 @@ For LC 5 constraints (n ≤ 1000), O(n²) is plenty fast.
 - **Mental Model:** Two walkers at every possible center of the string. They walk outward until a mismatch. Longest walk wins.
 - **Recognize it when:** find the longest palindrome in a string
 - **Key takeaway:** O(n) centers × O(n) expansion = O(n²). Try BOTH odd and even expansion at every index. Track start + length (or start + end indices) — don't rebuild the string char by char.
+- **Test cases:**
+  - `s = "babad"` → `"bab"` or `"aba"` (both valid). Odd expansion at index 1 finds `"bab"`; odd expansion at index 2 finds `"aba"`.
+  - `s = "cbbd"` → `"bb"`. Even expansion at index 1 (between the two b's) finds `"bb"`.
+  - `s = "a"` → `"a"`. Single char is trivially a palindrome.
+  - `s = "ac"` → `"a"` or `"c"`. No multi-char palindrome exists.
 
 ---
 

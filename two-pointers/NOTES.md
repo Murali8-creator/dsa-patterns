@@ -268,18 +268,23 @@ Converging two pointers can decide moves based on different things:
 - **Mental Model:** Two people at opposite ends of a sorted line. They shout their sum; if too small, the low person steps up; if too big, the high person steps down. They meet at the answer.
 - **Recognize it when:** sorted array + find a pair that sums to target
 - **Key takeaway:** Pure converging template. Direction of move is dictated by `sum vs target`.
+- **Test case:** `numbers = [2, 7, 11, 15], target = 9` → `[1, 2]` (1-indexed — `2 + 7 = 9`)
 
 ### 2. Three Sum (LC 15) — Sum-based
 
 - **Mental Model:** "I pick one number, you two find the rest." Fix one element, then the remaining two-sum problem is solved with converging pointers on the rest. Repeat with every possible "fixed" element.
 - **Recognize it when:** find triplets / quadruplets satisfying a sum condition
 - **Key takeaway:** K-sum problems reduce to (K-1)-sum inside a loop. Duplicates must be skipped at **both** levels — outer `i` and inner match.
+- **Test case:** `nums = [-1, 0, 1, 2, -1, -4]` → `[[-1, -1, 2], [-1, 0, 1]]`
+  - After sorting: `[-4, -1, -1, 0, 1, 2]`. Trace both levels of duplicate skipping.
 
 ### 3. Container With Most Water (LC 11) — Bottleneck
 
 - **Mental Model:** Two walls holding water. The **shorter wall always leaks** — that's the bottleneck. Moving the taller wall changes nothing useful (shorter wall still leaks at the same level), so you always move the shorter side hoping to find a taller one.
 - **Recognize it when:** two endpoints + area/distance/capacity between them, and one side is a "limiting factor"
 - **Key takeaway:** When moving one pointer can only hurt and moving the other *might* help — always move the "might help" pointer.
+- **Test case:** `height = [1, 8, 6, 2, 5, 4, 8, 3, 7]` → `49`
+  - Best pair is index 1 (height 8) and index 8 (height 7). `width = 7, min = 7, area = 49`.
 
 ### 4. Trapping Rain Water (LC 42) — Prefix Max / Two Pointers
 
@@ -288,6 +293,8 @@ Converging two pointers can decide moves based on different things:
   - **Two-pointer version:** Two surveyors walk toward each other; whoever stands on the shorter wall processes their column (because their partner is guaranteed taller, so the bottleneck is on their side).
 - **Recognize it when:** you need `min(leftMax, rightMax)` — something about both-sides context for every position
 - **Key takeaway:** Re-scanning for max at every index is O(n²). Precompute running max (prefix/suffix) OR collapse into two running variables with converging pointers.
+- **Test case:** `height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]` → `6`
+  - Water added at indices 2(+1), 4(+1), 5(+2), 6(+1), 9(+1) = 6 total.
 
 ---
 

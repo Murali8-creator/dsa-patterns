@@ -173,24 +173,33 @@ for (int j = 0; j < n; j++) {
 - **Mental Model:** Walk every paper. If it's not the target value, put it on your keepers pile.
 - **Filter:** `nums[j] != val`
 - **Return:** new length (`i`)
+- **Test case:** `nums = [3, 2, 2, 3], val = 3` → returns `2`, array becomes `[2, 2, _, _]`
+  - Another: `nums = [0, 1, 2, 2, 3, 0, 4, 2], val = 2` → returns `5`, array becomes `[0, 1, 3, 0, 4, _, _, _]`
 
 ### 2. Remove Duplicates from Sorted Array (LC 26)
 
 - **Mental Model:** Same walk — but since the array is sorted, duplicates sit next to each other. Keep only if different from the last one you kept.
 - **Filter:** `i == 0 || nums[j] != nums[i - 1]`
 - **Return:** new length (`i`)
+- **Test case:** `nums = [1, 1, 2]` → returns `2`, array becomes `[1, 2, _]`
+  - Another: `nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]` → returns `5`, array becomes `[0, 1, 2, 3, 4, _, _, _, _, _]`
 
 ### 3. Move Zeroes (LC 283)
 
 - **Mental Model:** Same walk — copy non-zeros forward, then fill the tail with zeros. OR one-pass swap so zeros naturally migrate to the back.
 - **Filter:** `nums[j] != 0`
 - **Return:** void (mutate in place)
+- **Test case:** `nums = [0, 1, 0, 3, 12]` → array becomes `[1, 3, 12, 0, 0]`
+  - Edge: `nums = [0]` → `[0]` (nothing to move).
 
 ### 4. Remove Duplicates II — Keep At Most 2 (LC 80)
 
 - **Mental Model:** Same walk — but this time, compare with what's 2 positions back on the write side. If it matches, you already have 2 copies — skip.
 - **Filter:** `i < 2 || nums[j] != nums[i - 2]`
 - **Return:** new length (`i`)
+- **Test case:** `nums = [1, 1, 1, 2, 2, 3]` → returns `5`, array becomes `[1, 1, 2, 2, 3, _]`
+  - Another: `nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]` → returns `7`, array becomes `[0, 0, 1, 1, 2, 3, 3, _, _]`
+  - Tricky: `nums = [1, 2, 3, 4]` (all unique) → returns `4`, array stays `[1, 2, 3, 4]`.
 
 ---
 

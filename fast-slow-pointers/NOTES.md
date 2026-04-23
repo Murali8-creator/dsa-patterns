@@ -286,24 +286,34 @@ Fast & Slow is always preferred when it applies.
 - **Mental Model:** Two runners on a track. If the track has a loop, the fast runner eventually laps the slow one.
 - **Recognize it when:** detect whether a linked list has a cycle
 - **Key takeaway:** O(1) space beats O(n) HashSet. Null checks on both `fast` and `fast.next` are critical.
+- **Test case:** `head = [3, 2, 0, -4]` with `pos = 1` (tail connects to index 1) → `true`
+  - Sequence: 3 → 2 → 0 → -4 → 2 (cycle). Fast laps slow inside the cycle.
+  - Negative example: `head = [1, 2], pos = -1` (no cycle) → `false`.
 
 ### 2. Middle of the Linked List (LC 876)
 
 - **Mental Model:** Fast runs twice as fast. When fast finishes the track, slow is exactly halfway.
 - **Recognize it when:** find the middle without knowing the length
 - **Key takeaway:** Same template as cycle detection, just walk until end.
+- **Test case:** `head = [1, 2, 3, 4, 5]` → returns node with value `3` (printed as `[3, 4, 5]`)
+  - Even length: `head = [1, 2, 3, 4, 5, 6]` → returns node with value `4` (second middle, per LC 876 spec).
 
 ### 3. Linked List Cycle II (LC 142)
 
 - **Mental Model:** Two-phase detective work. Phase 1: tortoise-hare to find any meeting point inside the loop. Phase 2: reset slow to head, both walk at 1x — they meet at the cycle entrance (by the `L = n*C − k` identity).
 - **Recognize it when:** find the node where a cycle begins
 - **Key takeaway:** Phase 2 is Floyd's magic — trust the math: walking L from head = walking L from meeting point (both land at cycle start).
+- **Test case:** `head = [3, 2, 0, -4]` with `pos = 1` → returns node with value `2` (cycle entrance)
+  - L (tail) = 1, C (cycle) = 3. Phase 1 meeting point: node `-4`. Reset slow to head, walk in sync → meet at node `2`.
 
 ### 4. Happy Number (LC 202)
 
 - **Mental Model:** Same two runners analogy — but the track isn't a linked list, it's a sequence of numbers where each "next step" is computed by `getSum(current) = sum of squares of digits`. Since digit-sums stay bounded, the sequence must eventually cycle. If the cycle is just `1 → 1 → 1...` (a self-loop at 1), the number is happy. Otherwise, it's stuck in a non-1 cycle.
 - **Recognize it when:** any deterministic sequence that must eventually repeat — not just linked lists
 - **Key takeaway:** Fast & slow works on **any sequence where each element has exactly one "next."** Happy Number's `1` is a self-loop — so every happy number's "cycle" is `{1}`. The test becomes: *detect the cycle, then check if the meeting point is 1.*
+- **Test case:** `n = 19` → `true`
+  - Sequence: 19 → 82 → 68 → 100 → 1 → 1 → ... Happy (cycles at 1).
+  - Negative: `n = 2` → `false`. Sequence: 2 → 4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4 (stuck in non-1 cycle).
 
 #### Canonical Template (cycle-based)
 
