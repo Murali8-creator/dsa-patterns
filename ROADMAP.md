@@ -216,7 +216,7 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 | 13 | Converging — Sorted Array Target Sum | Left + right pointers walk inward                 | [x]    |
 | 14 | Fast & Slow — Cycle Detection        | Tortoise & hare for cycles, middle finding        | [x]    |
 | 15 | Expanding from Center — Palindromes  | Expand outward to find palindromic substrings     | [x]    |
-| 16 | In-Place Array Modification          | Remove/move elements with read+write pointers     | [ ]    |
+| 16 | In-Place Array Modification          | Remove/move elements with read+write pointers     | [x]    |
 | 17 | String Reversal                      | Reverse in-place with two pointers                | [ ]    |
 | 18 | String Comparison — Backspaces       | Compare strings with backspace characters         | [ ]    |
 | 19 | Fixed Separation — Nth Node          | Two pointers N apart for nth-from-end problems    | [ ]    |
