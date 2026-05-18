@@ -218,7 +218,7 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 | 15 | Expanding from Center — Palindromes  | Expand outward to find palindromic substrings     | [x]    |
 | 16 | In-Place Array Modification          | Remove/move elements with read+write pointers     | [x]    |
 | 17 | String Reversal                      | Reverse in-place with two pointers                | [x]    |
-| 18 | String Comparison — Backspaces       | Compare strings with backspace characters         | [ ]    |
+| 18 | String Comparison — Backspaces       | Compare strings with backspace characters         | [x]    |
 | 19 | Fixed Separation — Nth Node          | Two pointers N apart for nth-from-end problems    | [ ]    |
 
 **Practice problems:** Three Sum, Container With Most Water, Two Sum II, Squares of a Sorted Array, Happy Number, Linked List Cycle, Find the Duplicate Number, Remove Nth Node, Middle of Linked List, Remove Duplicates, Move Zeroes, Sort Colors, Longest Palindromic Substring, Backspace String Compare
