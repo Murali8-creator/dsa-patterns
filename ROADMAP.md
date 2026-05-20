@@ -230,7 +230,7 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 | #  | Sub-Pattern                    | Core Idea                                           | Status |
 |----|--------------------------------|-----------------------------------------------------|--------|
 | 20 | Fixed-Size Subarray            | Window of constant size K slides across              | [x]    |
-| 21 | Variable-Size Condition        | Expand right, shrink left until condition met        | [ ]    |
+| 21 | Variable-Size Condition        | Expand right, shrink left until condition met        | [x]    |
 | 22 | Character Frequency Matching   | Anagram/permutation detection with frequency maps    | [ ]    |
 | 23 | Monotonic Queue (Max/Min)      | Deque maintaining window max/min in O(1)             | [ ]    |
 
