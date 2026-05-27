@@ -12,3 +12,7 @@ Thumbs.db
 # Claude
 .claude/
 CLAUDE.md
+
+# Junie (JetBrains AI) + agent instruction files
+.junie/
+AGENTS.md

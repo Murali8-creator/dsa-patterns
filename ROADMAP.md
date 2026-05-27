@@ -232,7 +232,7 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 | 20 | Fixed-Size Subarray            | Window of constant size K slides across              | [x]    |
 | 21 | Variable-Size Condition        | Expand right, shrink left until condition met        | [x]    |
 | 22 | Character Frequency Matching   | Anagram/permutation detection with frequency maps    | [x]    |
-| 23 | Monotonic Queue (Max/Min)      | Deque maintaining window max/min in O(1)             | [ ]    |
+| 23 | Monotonic Queue (Max/Min)      | Deque maintaining window max/min in O(1)             | [x]    |
 
 **Practice problems:** Find All Anagrams, Fruit Into Baskets, Frequency of Most Frequent Element, Continuous Subarrays, Contains Duplicate II, Jump Game VI, Find XSum of K-Long Subarrays
 
