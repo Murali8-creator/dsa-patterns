@@ -242,7 +242,7 @@ from foundational to advanced. Each sub-pattern has curated practice problems.
 
 | #  | Sub-Pattern                    | Core Idea                                           | Status |
 |----|--------------------------------|-----------------------------------------------------|--------|
-| 24 | On Sorted Array/List           | Classic halving search for target                    | [ ]    |
+| 24 | On Sorted Array/List           | Classic halving search for target                    | [x]    |
 | 25 | Find First/Last Occurrence     | Boundary binary search (lower/upper bound)           | [ ]    |
 | 26 | Rotated Sorted Array           | Modified BS handling the rotation pivot              | [ ]    |
 | 27 | Median/Kth in Sorted Arrays    | Binary search on partitions across arrays            | [ ]    |
